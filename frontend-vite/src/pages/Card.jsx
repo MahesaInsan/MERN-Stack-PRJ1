@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react"
 import Navbar from "../components/Navbar"
-import NewCard from "./NewCard"
-import CardDetail from "../components/CardDetail"
 
 const Card = () =>{
     const [cards, setCards] = useState(null)
 
     useEffect(()=>{
         const fetchCards = async()=>{
-            const response = await fetch('/card')
+            const response = await fetch('/api/card')
+            console.log(response)
             const json = await response.json()
 
             if(response.ok){
@@ -22,11 +21,10 @@ const Card = () =>{
     return(
         <div className="flex flex-row h-screen w-full">
             <Navbar />
-            <div className="pl-4">
-                {cards && cards.map((card)=>(
-                    <CardDetail key={card._id} card={card}/>
-                ))}
-                <NewCard />
+            <div>
+                {cards && cards.map((card)=>{
+                    <p key={card._id}>{card.name}</p>
+                })}
             </div>
         </div>
     )

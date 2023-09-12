@@ -1,4 +1,15 @@
 const CardDetail = ({card})=>{
+    const handleClick = async ()=>{
+        const response = await fetch('/card/' + card._id, {
+            method: 'DELETE'
+        })
+        const json = await response.json()
+
+        if(response.ok){
+            return json
+        }
+    }
+
     return(
         <div className="grid grid-cols-4 border w-1/2 mt-5 p-2">
             <div className="w-1/2">
@@ -10,11 +21,7 @@ const CardDetail = ({card})=>{
 
             </div>
             <div className="flex justify-end">
-                <img
-                 src="https://cdn-icons-png.flaticon.com/512/860/860829.png" 
-                 alt=""
-                 className="w-1/4 h-1/3 m-4" 
-                />
+                <a onClick={handleClick}>Delete</a>
             </div>
         </div>
     )

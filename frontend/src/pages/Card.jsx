@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import Navbar from "../components/Navbar"
-import NewCard from "./NewCard"
 import CardDetail from "../components/CardDetail"
+import { useCardContext } from "../hooks/useCardContext"
+import { NewCard } from "../components/NewCard"
 
 const Card = () =>{
-    const [cards, setCards] = useState(null)
+    const {cards, dispatch} = useCardContext()
 
     useEffect(()=>{
         const fetchCards = async()=>{
@@ -12,7 +13,7 @@ const Card = () =>{
             const json = await response.json()
 
             if(response.ok){
-                setCards(json)
+                dispatch({type:'SET_CARDS', payload: json})
             }
         }
         

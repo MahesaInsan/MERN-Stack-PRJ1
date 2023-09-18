@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import Navbar from "../components/Navbar"
 import CardDetail from "../components/CardDetail"
 import { useCardContext } from "../hooks/useCardContext"
-import { NewCard } from "../components/NewCard"
+import NewCard from "../components/NewCard"
 
 const Card = () =>{
     const {cards, dispatch} = useCardContext()
@@ -23,7 +23,7 @@ const Card = () =>{
     return(
         <div className="flex flex-row h-screen w-full">
             <Navbar />
-            <div className="pl-4">
+            <div className="p-4">
                 {cards && cards.map((card)=>(
                     <CardDetail key={card._id} card={card}/>
                 ))}

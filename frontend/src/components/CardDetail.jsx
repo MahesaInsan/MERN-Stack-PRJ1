@@ -1,4 +1,8 @@
+import { useCardContext } from "../hooks/useCardContext"
+
 const CardDetail = ({card})=>{
+    const {dispatch} = useCardContext()
+
     const handleClick = async ()=>{
         const response = await fetch('/card/' + card._id, {
             method: 'DELETE'
@@ -6,7 +10,7 @@ const CardDetail = ({card})=>{
         const json = await response.json()
 
         if(response.ok){
-            return json
+            dispatch({type:'DELETE_CARD', payload: json});
         }
     }
 
@@ -20,9 +24,9 @@ const CardDetail = ({card})=>{
                 <h2>Balance: {card.amount}</h2>
 
             </div>
-            <div className="flex justify-end">
-                <a onClick={handleClick}>Delete</a>
-            </div>
+            <button className="flex justify-end" onClick={handleClick}>
+                Delete
+            </button>
         </div>
     )
 }

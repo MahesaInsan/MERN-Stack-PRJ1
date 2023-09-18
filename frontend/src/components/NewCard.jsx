@@ -1,11 +1,13 @@
 import {useState} from "react"
+import { useCardContext } from "../hooks/useCardContext"
 
 const NewCard = () =>{
     const [name, setName] = useState('')
     const [amount, setAmount] = useState(0)
     const [error, setError] = useState(null)
+    const { dispatch } = useCardContext()
 
-    const handleSubmit = async(e)=>{
+    const handleSubmit = async(e)=>{  
         e.preventDefault()
 
         const card = {name, amount}
@@ -24,7 +26,7 @@ const NewCard = () =>{
         }
         if(response.ok){
             setError(null)
-            console.log('new Card added', json)
+            dispatch({type: 'CREATE_CARD', payload: json})
         }
     }
 

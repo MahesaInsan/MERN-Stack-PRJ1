@@ -4,7 +4,7 @@ const Home = () =>{
     return(
         <div className="flex flex-row h-screen w-full">
             <Navbar />
-            <div>TEST</div>
+            <div className="p-4">TEST</div>
         </div>
     )
 }

@@ -12,6 +12,10 @@ export const cardsReducer = (state, action)=>{
             return{
                 cards: [...state.cards, action.payload]
             }
+        case 'DELETE_CARD':
+            return{
+                cards: state.cards.filter((c)=> c._id !== action.payload._id)
+            }
         default: 
             return state
     }

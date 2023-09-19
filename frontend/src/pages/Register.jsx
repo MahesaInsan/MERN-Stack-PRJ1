@@ -1,14 +1,18 @@
 import { useState } from "react"
+import { useRegister } from "../hooks/useRegisterContext"
 
 const Register = ()=>{
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const {register, error, isLoading} = useRegister()
 
     const handleSubmit = async(e)=>{
         e.preventDefault()
-    
-        console.log(name, email, password)
+        
+        const user = {name, email, password}
+
+        await register(user)
     }
 
     return(
@@ -42,7 +46,8 @@ const Register = ()=>{
                         value={password}
                     />
                 </div>
-                <button type="submit b">REGISTER</button>
+                <button type="submit" className="rounded-full" disabled={isLoading}>REGISTER</button>
+                {error && <div className="error">{error}</div>}
             </form>
         </div>
         
